@@ -11,6 +11,7 @@
 		8F8357CC195DC6A000EE0EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F8357CB195DC6A000EE0EBE /* Images.xcassets */; };
 		8F8357D8195DC6A000EE0EBE /* YYAlertViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8357D7195DC6A000EE0EBE /* YYAlertViewTests.swift */; };
 		8F8357E2195DC6B700EE0EBE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8357E1195DC6B700EE0EBE /* MainViewController.swift */; };
+		8FC2E7B9195DC8B20034358E /* YYAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC2E7B8195DC8B20034358E /* YYAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		8F8357D6195DC6A000EE0EBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F8357D7195DC6A000EE0EBE /* YYAlertViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YYAlertViewTests.swift; sourceTree = "<group>"; };
 		8F8357E1195DC6B700EE0EBE /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8FC2E7B8195DC8B20034358E /* YYAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		8F8357C6195DC6A000EE0EBE /* YYAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				8FC2E7B7195DC8B20034358E /* Class */,
 				8F8357C9195DC6A000EE0EBE /* AppDelegate.swift */,
 				8F8357E1195DC6B700EE0EBE /* MainViewController.swift */,
 				8F8357CB195DC6A000EE0EBE /* Images.xcassets */,
@@ -104,6 +107,14 @@
 				8F8357D6195DC6A000EE0EBE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8FC2E7B7195DC8B20034358E /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				8FC2E7B8195DC8B20034358E /* YYAlertView.swift */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F8357CA195DC6A000EE0EBE /* AppDelegate.swift in Sources */,
+				8FC2E7B9195DC8B20034358E /* YYAlertView.swift in Sources */,
 				8F8357E2195DC6B700EE0EBE /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +393,7 @@
 				8F8357DD195DC6A000EE0EBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F8357DE195DC6A000EE0EBE /* Build configuration list for PBXNativeTarget "YYAlertViewTests" */ = {
 			isa = XCConfigurationList;
@@ -389,6 +402,7 @@
 				8F8357E0195DC6A000EE0EBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
