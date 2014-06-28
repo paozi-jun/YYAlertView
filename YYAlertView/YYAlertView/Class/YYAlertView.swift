@@ -64,8 +64,9 @@ class YYAlertView: UIView {
             self.leftBtn!.setTitleColor(UIColor.whiteColor(),forState:UIControlState.Normal)
             self.leftBtn!.addTarget(self, action: "leftBtnClicked", forControlEvents: UIControlEvents.TouchUpInside)
             self.leftBtn!.layer!.masksToBounds = true
-            self.rightBtn!.layer!.cornerRadius = 3.0
             self.addSubview(self.leftBtn)
+            self.leftBtn!.layer.masksToBounds = true
+            self.leftBtn!.layer!.cornerRadius = 3.0
             
             self.rightBtn = UIButton(frame:rightBtnFrame)
         }else {
@@ -79,6 +80,8 @@ class YYAlertView: UIView {
         self.rightBtn!.titleLabel!.font = UIFont.boldSystemFontOfSize(14)
         self.rightBtn!.setTitleColor(UIColor.whiteColor(),forState:UIControlState.Normal)
         self.rightBtn!.addTarget(self, action: "rightBtnClicked", forControlEvents: UIControlEvents.TouchUpInside)
+        self.rightBtn!.layer.masksToBounds = true
+        self.rightBtn!.layer!.cornerRadius = 3.0
         self.addSubview(self.rightBtn)
         
         self.alertTitleLabel!.text = title
