@@ -55,35 +55,30 @@ class YYAlertView: UIView {
         let kButtonBottomOffset:Float = 10.0
         
         if leftTitle {
-            rightBtnFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, kAlertHeight - kButtonBottomOffset - kButtonHeight, kSingleButtonWidth, kButtonHeight);
-            self.rightBtn = UIButton(frame: rightBtnFrame)
-            self.rightBtn!.frame = rightBtnFrame;
-            
-        }else {
             leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomOffset) * 0.5, kAlertHeight - kButtonBottomOffset - kButtonHeight, kCoupleButtonWidth, kButtonHeight);
             rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomOffset, kAlertHeight - kButtonBottomOffset - kButtonHeight, kCoupleButtonWidth, kButtonHeight);
             self.leftBtn = UIButton(frame:leftBtnFrame);
+            self.leftBtn!.setBackgroundImage(YYAlertView.imageWithColor(UIColor(red:227.0/255.0,green:100.0/255.0,blue:83.0/255.0,alpha:1)) ,forState:UIControlState.Normal)
+            self.leftBtn!.setTitle(leftTitle, forState: UIControlState.Normal)
+            self.leftBtn!.titleLabel!.font = UIFont.boldSystemFontOfSize(14)
+            self.leftBtn!.setTitleColor(UIColor.whiteColor(),forState:UIControlState.Normal)
+            self.leftBtn!.addTarget(self, action: "leftBtnClicked", forControlEvents: UIControlEvents.TouchUpInside)
+            self.leftBtn!.layer!.masksToBounds = true
+            self.rightBtn!.layer!.cornerRadius = 3.0
+            self.addSubview(self.leftBtn)
+            
             self.rightBtn = UIButton(frame:rightBtnFrame)
+        }else {
+            rightBtnFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, kAlertHeight - kButtonBottomOffset - kButtonHeight, kSingleButtonWidth, kButtonHeight);
+            self.rightBtn = UIButton(frame: rightBtnFrame)
+            self.rightBtn!.frame = rightBtnFrame;
         }
         
         self.rightBtn!.setBackgroundImage(YYAlertView.imageWithColor(UIColor(red:87.0/255.0,green:135.0/255.0,blue:173.0/255.0,alpha:1)) ,forState:UIControlState.Normal)
-        self.leftBtn!.setBackgroundImage(YYAlertView.imageWithColor(UIColor(red:227.0/255.0,green:100.0/255.0,blue:83.0/255.0,alpha:1)) ,forState:UIControlState.Normal)
-
         self.rightBtn!.setTitle(rightTitle, forState: UIControlState.Normal)
-        self.leftBtn!.setTitle(leftTitle, forState: UIControlState.Normal)
-        
-        self.leftBtn!.titleLabel!.font = UIFont.boldSystemFontOfSize(14)
         self.rightBtn!.titleLabel!.font = UIFont.boldSystemFontOfSize(14)
-        self.leftBtn!.setTitleColor(UIColor.whiteColor(),forState:UIControlState.Normal)
         self.rightBtn!.setTitleColor(UIColor.whiteColor(),forState:UIControlState.Normal)
-        
-        self.leftBtn!.addTarget(self, action: "leftBtnClicked", forControlEvents: UIControlEvents.TouchUpInside)
         self.rightBtn!.addTarget(self, action: "rightBtnClicked", forControlEvents: UIControlEvents.TouchUpInside)
-        self.leftBtn!.layer!.masksToBounds = true
-        self.rightBtn!.layer!.masksToBounds = true
-        self.leftBtn!.layer!.cornerRadius = 3.0
-        self.rightBtn!.layer!.cornerRadius = 3.0
-        self.addSubview(self.leftBtn)
         self.addSubview(self.rightBtn)
         
         self.alertTitleLabel!.text = title
@@ -99,7 +94,7 @@ class YYAlertView: UIView {
     func leftBtnClicked(){
         self.leftLeave = true
         self.dismissAlert()
-        self.leftBlock();
+        self.leftBlock()
     }
     
     func rightBtnClicked(){
@@ -108,7 +103,52 @@ class YYAlertView: UIView {
         self.rightBlock()
     }
     
+    func show(){
+        var window = UIApplication.sharedApplication().keyWindow
+        self.frame = CGRectMake((CGRectGetWidth(window.bounds) - self.kAlertWidth) * 0.5, -self.kAlertHeight - 30, self.kAlertWidth, self.kAlertHeight)
+        window.addSubview(self)
+    }
+
+    
     func dismissAlert(){
+        self.dismissBlock()
+        
+        if self.backImageView {
+            self.backImageView!.removeFromSuperview()
+            self.backImageView = nil
+        }
+        UIView.animateWithDuration(0.3, delay: 0.0, options:UIViewAnimationOptions.CurveEaseInOut, animations: {
+            self.alpha = 0
+            }, completion: {(_)->Void in
+                
+            })
+    }
+    
+    override func willMoveToSuperview(newSuperview: UIView!)
+    {
+        if newSuperview {
+            var shareWindow = UIApplication.sharedApplication().keyWindow
+            
+            if !self.backImageView {
+                self.backImageView = UIView(frame:shareWindow.bounds)
+                self.backImageView!.userInteractionEnabled = true
+                self.backImageView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissAlert"))
+            }
+            self.backImageView!.backgroundColor = UIColor.blackColor()
+            self.backImageView!.alpha = 0.6
+            shareWindow.addSubview(self.backImageView)
+            
+            self.frame = CGRectMake((CGRectGetWidth(shareWindow.bounds) - kAlertWidth) * 0.5, (CGRectGetHeight(shareWindow.bounds) - kAlertHeight) * 0.5, kAlertWidth, kAlertHeight);
+            self.transform = CGAffineTransformMakeScale(0, 0)
+            UIView.animateWithDuration(0.35, delay: 0.0, options:UIViewAnimationOptions.CurveEaseInOut, animations: {
+                self.transform = CGAffineTransformMakeScale(1.2,1.2)
+                }, completion: {(_)->Void in
+                    UIView.animateWithDuration(0.1, delay: 0.0, options:UIViewAnimationOptions.CurveEaseInOut, animations: {
+                        self.transform = CGAffineTransformMakeScale(1,1)
+                        }, completion: {(_)->Void in
+                        })
+                })
+        }
         
     }
     
